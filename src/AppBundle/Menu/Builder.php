@@ -35,14 +35,12 @@ class Builder implements ContainerAwareInterface
         $menu->addChild('Events With Me', array('route' => 'event_participate'))
              ->setAttribute('icon', 'fa  fa-users');
         
-        $menu->addChild('Change password', array('route' => 'fos_user_change_password'))
+        $menu->addChild('Profile', array('route' => 'fos_user_profile_show'))
              ->setAttribute('icon', 'fa fa-key');
         
-        $menu->addChild('Profile view', array('route' => 'fos_user_profile_show'))
-             ->setAttribute('icon', 'fa fa-key');
-
-        $menu->addChild('Profile edit', array('route' => 'fos_user_profile_edit'))
-             ->setAttribute('icon', 'fa fa-key');
+        $menu['Profile']->addChild('Change password', array('route' => 'fos_user_change_password'));
+        
+        $menu['Profile']->addChild('Profile edit', array('route' => 'fos_user_profile_edit'));
         
         return $menu;
     }
