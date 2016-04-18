@@ -1,0 +1,113 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Near Events{% endblock %}
+
+{% block body %}
+    
+<!-- Your Page Content Here -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Near you
+        <small>Events max 5 km from you</small>
+      </h1>
+    </section>    
+    
+<section class="content">
+<div class="row">
+    <form action="#" method="get">
+        <!-- left column -->
+        <div class="col-md-6">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Address</h3>
+                </div>
+                <div class="box-body">
+
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                    <input id="address" name="address" value="{{address}}" type="text" class="form-control" placeholder="Address">
+                  </div>
+                  <br>
+
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-arrows"></i></span>
+                    <input id="lat" name="lat" value="{{lat}}" readonly="readonly" type="text" class="form-control" placeholder="Lat">
+                  </div>
+                  <br>
+
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-arrows"></i></span>
+                    <input id="lng" name="lng" value="{{lng}}" readonly="readonly" type="text" class="form-control" placeholder="Lng">
+                  </div>
+                  <br>
+
+
+                  <!-- /input-group -->
+                </div>
+
+                <div class="box-footer">
+                    <a id="findByAddress" href="#" class="btn btn-success">Find By Address</a>
+                    <a id="findMe" href="#" class="btn btn-success">Find Me</a>
+                    <input class="btn btn-success" type="submit" name="findEvents" value="Find events"/>
+                </div>
+
+                <!-- /.box-body -->
+
+              </div>
+              <!-- /.box -->
+        </div>
+    </form>
+                
+                
+    <!-- right column -->
+    <div class="col-md-6">
+      <!-- Horizontal Form -->
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Event Location</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+          <div class="box-body">
+            <div class="new-event-map-responsive">
+              <div id="map"></div>
+            </div> 
+          </div>
+          <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!--/.col (right) -->   
+</div>  
+    
+<div id="events">                    
+{% include('AppBundle:Event:Partial/list.html.twig') %}  
+</div>
+</section>
+                
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script src="{{ asset('googlemaps/googlemaps.js') }}"></script>
+    <script type="text/javascript">
+       $( document ).ready(function() {
+           
+           mapObj.initialize('map', 'lat', 'lng');
+           
+           $('#findByAddress').on('click', function() {
+                mapObj.codeAddress('address','lat', 'lng');
+                $('#events').hide();
+           });
+           
+           $('#findMe').on('click', function() {
+                mapObj.getLocation();
+                $('#address').val('');
+                $('#events').hide();
+           });
+           
+        });
+    </script>
+{% endblock %}
+  

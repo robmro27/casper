@@ -1,0 +1,20 @@
+.new-event-map-responsive{
+    overflow:hidden;
+    padding-bottom:75%;
+    position:relative;
+    height:0;
+}
+.new-event-map-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+.new-event-map-responsive #map {
+    width: 450px; 
+    height: 450px; 
+    border: 1px solid black; 
+    margin: 0 auto;
+    background: gray;
+}

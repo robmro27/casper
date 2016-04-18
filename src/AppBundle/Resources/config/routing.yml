@@ -1,0 +1,54 @@
+event_list:
+    path:     /
+    defaults: { _controller: AppBundle:Event:eventList }
+event_list_my:
+    path:   /myevents
+    defaults: {_controller: AppBundle:Event:eventListMy}
+event_participate:
+    path:   /participate
+    defaults: {_controller: AppBundle:Event:eventListParticipate}
+event_list_my_invitations:
+    path:   /invitations
+    defaults: {_controller: AppBundle:Event:eventListMyInvitations}
+events_upcomming:
+    path:     /eventsUpcomming
+    defaults: { _controller: AppBundle:Event:eventsUpcomming }
+
+event_details:
+    path:     /eventDetails/{eventId}
+    defaults: { _controller: AppBundle:Event:eventDetails }
+
+event_new:
+    path:     /newEvent
+    defaults: { _controller: AppBundle:Event:newEvent }
+
+join_event:
+    path:     /joinEvent/{eventId}
+    defaults: { _controller: AppBundle:Event:joinEvent }
+edit_event:
+    path:     /editEvent/{eventId}
+    defaults: { _controller: AppBundle:Event:editEvent } 
+event_near:
+    path:   /near
+    defaults: {_controller: AppBundle:Event:near}
+remove_user:
+    path:   /remove/user/{eventId}/{userId}
+    defaults: {_controller: AppBundle:Event:removeUser}
+    
+    
+    
+invitation_invite:
+    path:     /invite/{userId}/{eventId}
+    defaults: { _controller: AppBundle:Invitation:invite }
+
+invitation_accept:
+    path:     /accept/{invitationId}
+    defaults: { _controller: AppBundle:Invitation:accept }
+
+invitation_cancel:
+    path:     /cancel/{invitationId}
+    defaults: { _controller: AppBundle:Invitation:cancel }
+
+invitation_reject:
+    path:     /reject/{invitationId}
+    defaults: { _controller: AppBundle:Invitation:reject }

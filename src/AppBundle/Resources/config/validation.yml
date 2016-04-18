@@ -1,0 +1,25 @@
+AppBundle\Entity\Event:
+    properties:
+        event_name:
+            - NotBlank: ~
+        event_description:
+            - NotBlank: ~
+        event_duration:
+            - NotBlank: ~
+        event_max_users:
+            - NotBlank: ~
+        event_type:
+            - NotBlank: ~
+        event_location:
+            - NotBlank: ~
+        event_lat:
+            - NotBlank: ~
+        event_lng:
+            - NotBlank: ~
+        event_start:
+            - NotBlank: ~
+            - Type: \DateTime
+        event_invitations_end:
+            - NotBlank: ~
+            - Type: \DateTime
+    

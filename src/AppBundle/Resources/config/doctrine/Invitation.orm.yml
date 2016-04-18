@@ -1,0 +1,30 @@
+AppBundle\Entity\Invitation:
+    type: entity
+    table: invitation
+    repositoryClass: AppBundle\Entity\InvitationRepository
+    manyToOne:
+        user:
+          targetEntity: User
+          inversedBy: invitations
+          joinColumn:
+            name: user_id
+            referencedColumnName: id
+        event:
+          targetEntity: Event
+          inversedBy: invitations
+          joinColumn:
+            name: event_id
+            referencedColumnName: id
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        sent:
+            type: datetime
+            column: sent
+    uniqueConstraints:
+        search_idx:
+          columns: [ user_id, event_id ]
+        
+            

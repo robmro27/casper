@@ -1,0 +1,16 @@
+parameters:
+    my_user_provider.class: AppBundle\Security\Core\User\FOSUBUserProvider
+
+services:
+    
+    my_user_provider:
+        class: "%my_user_provider.class%"
+        arguments: [@fos_user.user_manager,{facebook: facebook_id}]
+        
+    app.form.registration:
+        class: AppBundle\Form\RegistrationType
+        tags:
+            - { name: form.type, alias: app_user_registration }
+           
+    app.event_validator:
+            class:        AppBundle\DependencyInjection\EventValidator

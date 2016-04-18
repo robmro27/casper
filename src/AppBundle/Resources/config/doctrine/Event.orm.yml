@@ -1,0 +1,70 @@
+AppBundle\Entity\Event:
+    type: entity
+    table: event
+    repositoryClass: AppBundle\Entity\EventRepository
+    oneToMany:
+        invitations:
+            targetEntity: Invitation
+            mappedBy: event
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: events
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    manyToMany:
+        users_participate:
+          targetEntity: User
+          mappedBy: events_participate
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        event_name:
+            type: string
+            length: 255
+            column: event_name
+        event_location:
+            type: string
+            length: 255
+            column: event_location
+        event_description:
+            type: text
+            column: event_description
+        event_start:
+            type: datetime
+            column: event_start
+        event_duration:
+            type: integer
+            column: event_duration
+        event_max_users:
+            type: integer
+            column: event_max_users
+        event_users_qty:
+            type: integer
+            column: event_users_qty
+        event_invitations_end:
+            type: datetime
+            column: event_invitations_end
+        event_type:
+            type: boolean
+            column: event_type
+        event_lat:
+            type: decimal(18)
+            scale: 16
+            precision: 18
+            nullable: true
+            column: event_lat
+        event_lng:
+            type: decimal(18)
+            scale: 16
+            precision: 18
+            nullable: true
+            column: event_lng
+        added:
+            type: datetime
+            column: added
+        
+            

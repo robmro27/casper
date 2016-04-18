@@ -1,0 +1,46 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}My Invitation Events{% endblock %}
+
+
+
+{% block body %}
+<!-- Your Page Content Here -->
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+    You are invited for
+    <small>Private events that you are invited for</small>
+  </h1>
+  {#<ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+    <li class="active">Here</li>
+  </ol>#}
+</section>
+
+<!-- Main content -->
+<section class="content">
+    
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-12">
+        
+            <div class="info-box">
+              <span class="info-box-icon bg-green"><i class="ion ion-ios-people-outline"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">All Events</span>
+                <span class="info-box-number"> {{ pagination.getTotalItemCount }}</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+              
+        <!-- /.info-box -->
+        </div>
+    <!-- /.col -->
+    </div>
+              
+    {% include('AppBundle:Event:Partial/list.html.twig') %}  
+
+</section>
+<!-- /.content -->
+{% endblock %}

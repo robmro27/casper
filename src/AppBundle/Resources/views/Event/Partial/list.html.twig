@@ -1,0 +1,50 @@
+<div class="row">
+{% for item in pagination %}
+<div class="col-md-6">
+<!-- Custom Tabs -->
+  <div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+      <li class="active"><a data-toggle="tab">{{ item.eventName }} by '{{ item.user.username }}'</a></li>
+      <li class="pull-right">
+          Users: {{ item.eventUsersQty }}/{{ item.eventMaxUsers }}
+          {% if item.eventType == constant('\\AppBundle\\Entity\\Event::EVENT_PRIVATE') %}
+              Private <i class="fa fa-key"></i>
+          {% endif %}
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active">
+        <dl class="dl-horizontal">
+        <dt>Location:</dt><dd>{{ item.eventLocation }}</dd>
+        <dt>Start Date:</dt><dd>{{ item.eventStart|date("m/d/Y") }}</dd>
+        <dt>Duration:</dt><dd>{{ item.eventDuration }}</dd>
+        <dt>Invitations End Date:</dt><dd>{{ item.eventInvitationsEnd|date("m/d/Y") }}</dd>
+      </dl>
+        <p>{{ item.eventDescription }}</p>
+        <a href="{{ path('event_details', {'eventId': item.id}) }}">
+            <small><i class="fa fa-edit"></i> Event Details</small>
+        </a>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+    <!-- /.tab-content -->
+  </div>
+</div>
+
+ {% else %}
+     <h3>No events found</h3>
+{% endfor %}      
+        
+
+</div>
+
+
+<div class="clear"><div>
+
+<div class="row">
+<div class="col-md-6 col-sm-6 col-xs-12">
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+</div>
+</div>

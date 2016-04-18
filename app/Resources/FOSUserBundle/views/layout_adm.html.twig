@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+{% block fos_user_content %}{% endblock %}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script>
+        $(function () {
+            $('#fos_user_registration_form_birthDate').datepicker({
+               autoclose: true
+             });
+        });
+    </script>
+{% endblock %}

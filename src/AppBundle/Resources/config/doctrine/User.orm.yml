@@ -1,0 +1,45 @@
+AppBundle\Entity\User:
+    type:  entity
+    table: fos_user
+    repositoryClass: AppBundle\Entity\UserRepository
+    oneToMany:
+        events:
+            targetEntity: Event
+            mappedBy: user
+        invitations:
+            targetEntity: Invitation
+            mappedBy: invitation
+    manyToMany:
+        events_participate:
+          targetEntity: Event
+          joinTable:
+            name: users_events
+            joinColumns:
+              user_id:
+                referencedColumnName: id
+            inverseJoinColumns:
+              event_id:
+                referencedColumnName: id
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        birthDate:
+          type: datetime
+          column: birth_date
+          nullable: true
+        sex:
+          type: boolean
+          column: sex
+          nullable: true
+        facebook_id:
+            type: string
+            length: 255
+            nullable: true
+        facebook_access_token:
+            type: string
+            length: 255
+            nullable: true
+      

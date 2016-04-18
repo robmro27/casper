@@ -1,0 +1,77 @@
+{% form_theme form 'form/fields.html.twig' %}
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="register-box">
+
+  <div class="register-box-body">
+    <p class="login-box-msg">Register a new membership</p>
+
+        <div class="box-body">
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'novalidate' : 'novalidate', 'class': 'fos_user_registration_register'}}) }}
+            
+                <div class="box-body">
+
+                    <div id="fos_user_registration_form" class="text-red">
+                        
+                        <div class="form-group has-feedback">
+                            {{ form_errors(form.email) }}
+                            {{ form_widget(form.email) }}
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            {{ form_errors(form.username) }}
+                            {{ form_widget(form.username) }}
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            {{ form_errors(form.plainPassword.first) }}
+                            {{ form_widget(form.plainPassword.first) }}
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            {{ form_errors(form.plainPassword.second) }}
+                            {{ form_widget(form.plainPassword.second) }}
+                            <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+                        </div>
+
+                        <div class="form-group has-feedback">
+                            {{ form_errors(form.birthDate) }}
+                            {{ form_widget(form.birthDate) }}
+                            <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
+                        </div>
+                            
+                        <div class="form-group has-feedback">
+                            {{ form_errors(form.sex) }}
+                            {{ form_widget(form.sex) }}
+                        </div>
+                        
+                        <!-- /.col -->
+                        <div class="col-xs-12">
+                          <input type="submit" class="btn btn-primary btn-block btn-flat" value="{{ 'registration.submit'|trans }}"/>
+                        </div>
+                        <!-- /.col -->
+                        
+                    </div>
+
+                </div>
+                
+            {{ form_end(form) }}
+
+        </div>
+
+        {#<div class="social-auth-links text-center">
+          <p>- OR -</p>
+          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using
+            Facebook</a>
+          <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using
+            Google+</a>
+        </div>#}
+
+        <a href="{{ path('fos_user_security_login')}}" class="text-center">I already have a membership</a>
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->    
+            

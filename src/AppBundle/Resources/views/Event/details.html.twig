@@ -1,0 +1,160 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Event Details{% endblock %}
+
+{% block body %}
+    
+<!-- Your Page Content Here -->
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Add Event
+        <small>add</small>
+      </h1>
+    </section>    
+    
+<section class="content">
+<div class="row">
+    <form action="#" method="get">
+        <input type="hidden" id="lat" value="{{event.eventLat}}" />
+        <input type="hidden" id="lng" value="{{event.eventLng}}" />
+    </form>
+    <!-- left column -->
+    <div class="col-md-8">
+        <div class="box box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Address</h3>
+            </div>
+            <div class="box-body">
+                <dl class="dl-horizontal">
+                    <dt>Name:</dt>
+                    <dd>{{ event.eventName }}</dd>
+                    <dt>Location:</dt>
+                    <dd>{{ event.eventLocation }}</dd>
+                    <dt>Start:</dt>
+                    <dd>{{ event.eventStart|date("m/d/Y") }}</dd>
+                    <dt>Duration:</dt>
+                    <dd>{{ event.eventDuration }}</dd>
+                    <dt>Invitations End:</dt>
+                    <dd>{{ event.eventInvitationsEnd|date("m/d/Y") }}</dd>
+                    <dt>Current/Max users:</dt>
+                    <dd>{{ event.eventUsersQty }}/{{ event.eventMaxUsers }}</dd>
+                    <dt>Type:</dt>
+                    <dd>{{ event.eventTypeName(event.eventType) }}</dd>
+                    <dt>Description:</dt>
+                    <dd>{{ event.eventDescription }}</dd>
+                </dl>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+    </div>
+                
+    <!-- right column -->
+    <div class="col-md-4">
+      <!-- Horizontal Form -->
+      <div class="box box-success">
+        <div class="box-header with-border">
+          <h3 class="box-title">Current Members</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+          <div class="box-body">
+                <ul>
+                {% for user in event.usersParticipate %}
+                    <li>
+                        {{ user.username|e }}
+                        
+                        {% if (app.user.id == event.user.id and app.user.id != user.id)%} 
+                        <a href="{{ path('remove_user', {'userId' : user.id ,'eventId': event.id}) }}">
+                            <small><i class="fa fa-remove"></i> Delete</small>
+                        </a>
+                        {% endif %}
+                        
+                    </li>
+                {% endfor %}
+                </ul>
+                <a href="{{ path('join_event', {'eventId': event.id}) }}">
+                    <small><i class="fa fa-users"></i> Join this event</small>
+                </a>
+          </div>
+          <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+    </div>
+    <!--/.col (right) -->  
+</div>     
+    
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+        <!-- Horizontal Form -->
+        <div class="box box-success">
+          <div class="box-header with-border">
+            <h3 class="box-title">Event Location</h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+            <div class="box-body">
+              <div class="new-event-map-responsive">
+                <div id="map"></div>
+              </div> 
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+                
+    <!-- right column -->
+    <div class="col-md-4">
+        {% if pagination|length > 0 %}
+        <div class="col-xs-12">
+          <div class="box box-success">
+            <div class="box-header">
+              <h3 class="box-title">Invite users</h3>
+            </div>
+            <!-- /.box-header -->
+            
+            <div class="box-body table-responsive no-padding">
+              <table class="table table-hover">
+                <tr>
+                  <th>Name</th>
+                  <th>Actions</th>
+                </tr>
+                {% for item in pagination %}
+                <tr>
+                  <td>{{ item.username }}</td>
+                  <td><a href="{{ path('invitation_invite', {'userId': item.id,'eventId': event.id}) }}">
+                          <small><i class="fa fa-users"></i> Send invitation</small>
+                      </a>
+                  </td>
+                </tr>
+                {% endfor %}
+              </table>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer clearfix">
+                <div class="navigation">
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+            </div>
+          </div>
+          <!-- /.box -->
+        </div>
+      {% endif %}
+    </div>
+    <!--/.col (right) -->             
+      
+</div>         
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+    <script src="{{ asset('googlemaps/googlemaps.js') }}"></script>
+    <script type="text/javascript">
+       $( document ).ready(function() {
+            mapObj.initialize('map', 'lat', 'lng');
+       });
+    </script>
+{% endblock %}
