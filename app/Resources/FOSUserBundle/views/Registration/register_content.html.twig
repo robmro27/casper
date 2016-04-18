@@ -14,37 +14,37 @@
                         
                         <div class="form-group has-feedback">
                             {{ form_errors(form.email) }}
-                            {{ form_widget(form.email) }}
+                            {{ form_widget(form.email,{'attr': {'placeholder': 'email'}}) }}
                             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
                             {{ form_errors(form.username) }}
-                            {{ form_widget(form.username) }}
+                            {{ form_widget(form.username, {'attr': {'placeholder': 'login'}}) }}
                             <span class="glyphicon glyphicon-user form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
                             {{ form_errors(form.plainPassword.first) }}
-                            {{ form_widget(form.plainPassword.first) }}
+                            {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'password'}}) }}
                             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
                             {{ form_errors(form.plainPassword.second) }}
-                            {{ form_widget(form.plainPassword.second) }}
+                            {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'repeat password'}}) }}
                             <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                         </div>
 
                         <div class="form-group has-feedback">
                             {{ form_errors(form.birthDate) }}
-                            {{ form_widget(form.birthDate) }}
+                            {{ form_widget(form.birthDate, {'attr': {'placeholder': 'birth date'}}) }}
                             <span class="glyphicon glyphicon-calendar form-control-feedback"></span>
                         </div>
                             
                         <div class="form-group has-feedback">
                             {{ form_errors(form.sex) }}
-                            {{ form_widget(form.sex) }}
+                            {{ form_widget(form.sex, {'attr': {'placeholder': 'gender'}}) }}
                         </div>
                         
                         <!-- /.col -->
