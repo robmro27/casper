@@ -44,10 +44,10 @@ class InvitationController extends Controller
                 'text/html'
             );
         
-        //$this->get('mailer')->send($message);
+        $this->get('mailer')->send($message);
         
         $this->addFlash('success','Invitation for user ' . $user->getUsername(). ' sent');
-        return $this->redirectToRoute('event_details',array('eventId' => $event->getId()));
+        return $this->redirectToRoute('event_details',array('id' => $event->getId()));
     }
 
 }
