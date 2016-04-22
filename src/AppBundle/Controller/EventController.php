@@ -219,9 +219,7 @@ class EventController extends Controller
             throw $this->createAccessDeniedException();
         }
         
-        try {
-            $validator->validateJoin($event, $user, $invitation);
-        } catch (\Exception $ex) {
+        if (false !== $validator->validateJoin($event, $user, $invitation)) {
             $this->addFlash('error',$ex->getMessage());
             return $this->redirectToRoute('event_details',array('eventId' => $eventId));
         }

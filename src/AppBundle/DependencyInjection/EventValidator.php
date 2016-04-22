@@ -57,30 +57,30 @@ class EventValidator {
      * 
      * @param \AppBundle\Entity\Event $event
      * @param \AppBundle\Entity\User $user
-     * @throws \Exception
+     * @return boolean|string
      */
     public function validateJoin($event, $user) {
         
         if (new \DateTime() >= $event->getEventStart()) {
-            throw new \Exception('This event is old!');
+            return 'This event is old!';
         }
         
         if (new \DateTime() >= $event->getEventInvitationsEnd()) {
-            throw new \Exception('Time to join this event passed!');
+            return 'Time to join this event passed!';
         }
         
         if ($event->getUsersParticipate()->contains($user)) {
-            throw new \Exception('You are already member of this event!');
+            return 'You are already member of this event!';
         }
         
         if ($event->getUser()->getId() == $user->getId()) {
-            throw new \Exception('You can\'t join to your event!');
+            return 'You can\'t join to your event!';
         }
         
         if ($event->getEventUsersQty() >= $event->getEventMaxUsers()) {
-            throw new \Exception('You can\'t join to event is\'s full!');
+            return 'You can\'t join to event is\'s full!';
         }
-        
+        return false;
     }
     
 }
