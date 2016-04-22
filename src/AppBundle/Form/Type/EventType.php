@@ -36,7 +36,7 @@ class EventType extends AbstractType {
                 
                 ->add('event_start', DateTimeType::class, [
                                         'widget' => 'single_text',
-                                        'format' => 'dd/MM/yyyy hh:mm',
+                                        'format' => 'dd/MM/yyyy HH:mm',
                                         'data'   => new \DateTime()
                                     ])
                 
@@ -46,7 +46,7 @@ class EventType extends AbstractType {
                 
                 ->add('event_invitations_end', DateTimeType::class, [
                                         'widget' => 'single_text',
-                                        'format' => 'dd/MM/yyyy hh:mm',
+                                        'format' => 'dd/MM/yyyy HH:mm',
                                         'label'  => 'Invitations end',
                                         'data'   => new \DateTime()
                                     ])
