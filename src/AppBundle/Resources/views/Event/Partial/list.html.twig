@@ -21,7 +21,7 @@
         <dt>Invitations End Date:</dt><dd>{{ item.eventInvitationsEnd|date("m/d/Y") }}</dd>
       </dl>
         <p>{{ item.eventDescription }}</p>
-        <a href="{{ path('event_details', {'eventId': item.id}) }}">
+        <a href="{{ path('event_details', {'id': item.id}) }}">
             <small><i class="fa fa-edit"></i> Event Details</small>
         </a>
       </div>

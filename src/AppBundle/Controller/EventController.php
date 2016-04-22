@@ -5,14 +5,13 @@ namespace AppBundle\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use \AppBundle\Form\Type\EventType;
+use AppBundle\Entity\Event;
 
 class EventController extends Controller
 {
     
     /**
      * List of events in witch user participate
-     * @param Request $request
-     * @return type
      */
     public function eventListParticipateAction(Request $request) 
     {
@@ -39,8 +38,6 @@ class EventController extends Controller
     
     /**
      * List of events witch user create
-     * @param Request $request
-     * @return type
      */
     public function eventListMyAction(Request $request) 
     {
@@ -67,8 +64,6 @@ class EventController extends Controller
     
     /**
      * List of public events
-     * @param Request $request
-     * @return type
      */
     public function eventListAction(Request $request)
     {
@@ -93,8 +88,6 @@ class EventController extends Controller
     
     /**
      * List of events witch user are invited for
-     * @param Request $request
-     * @return type
      */
     public function eventListMyInvitationsAction(Request $request)
     {
@@ -122,8 +115,6 @@ class EventController extends Controller
     
     /**
      * Short list of events witch user are ivited for
-     * @param type $maxResults
-     * @return type
      */
     public function lastInvitationAction( $maxResults = 3 ) 
     {
@@ -142,25 +133,15 @@ class EventController extends Controller
     
     
     /**
-     * 
-     * @param type $eventId
-     * @param type $userId
-     * @return type
-     * @throws type
+     * Remove user from event
      */
-    public function removeUserAction($eventId, $userId)  
+    public function removeUserAction(Event $event, $userId)  
     {
         $loggedUser = $this->container->get('security.context')->getToken()->getUser();
         /* @var $logUser \AppBundle\Entity\User */
         
         $em = $this->getDoctrine()->getManager();
-        $event = $this->getDoctrine()->getRepository('AppBundle:Event')->find($eventId);
-        
-        /* @var $event \AppBundle\Entity\Event */
-        if (!$event) {
-            throw $this->createNotFoundException('No event found for id '.$eventId);
-        }
-        
+       
         $user = $this->getDoctrine()->getRepository('AppBundle:User')->find($userId);
         /* @var $user \AppBundle\Entity\User */
         if (!$user) {
@@ -186,9 +167,7 @@ class EventController extends Controller
     
     
     /**
-     * List o events near user
-     * @param Request $request
-     * @return type
+     * Add new event
      */
     public function newEventAction( Request $request )
     {
@@ -222,17 +201,12 @@ class EventController extends Controller
     
     
     /**
-     * 
-     * @param type $eventId
-     * @return type
+     * Join logged user to event
      */
-    public function joinEventAction( $eventId )
+    public function joinEventAction( Event $event )
     {
         $user = $this->container->get('security.context')->getToken()->getUser();
         /* @var $user \AppBundle\Entity\User */
-        
-        $event = $this->getDoctrine()->getRepository('AppBundle:Event')->find($eventId);
-        /* @var $event \AppBundle\Entity\Event */
         
         $invitationsRepository = $this->getDoctrine()->getRepository('AppBundle:Invitation');
         $invitation = $invitationsRepository->findOneBy(array('user' => $user, 'event' => $event));
@@ -270,17 +244,11 @@ class EventController extends Controller
     
     
     /**
-     * 
-     * @param Request $request
-     * @param int $eventId
-     * @return type
-     * @throws type
+     * Show event details
      */
-    public function eventDetailsAction( Request $request, $eventId )
+    public function eventDetailsAction( Request $request, Event $event )
     {
         $pagination = null;
-        $event = $this->getDoctrine()->getRepository('AppBundle:Event')
-                                     ->find($eventId);
 
         $user = $this->container->get('security.context')->getToken()->getUser();
         /* @var $user \AppBundle\Entity\User */
@@ -306,10 +274,6 @@ class EventController extends Controller
             $pagination = $paginator->paginate($users,$request->query->getInt('page', 1),15);
         }
         
-        if (!$event) {
-            throw $this->createNotFoundException('No event found for id '.$eventId);
-        }
-        
         return $this->render('AppBundle:Event:details.html.twig', array(
             'event' => $event,
             'pagination' => $pagination
@@ -320,8 +284,6 @@ class EventController extends Controller
     
     /**
      * List of events near location
-     * @param Request $request
-     * @return type
      */
     public function nearAction( Request $request )
     {

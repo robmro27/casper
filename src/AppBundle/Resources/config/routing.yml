@@ -15,7 +15,7 @@ events_upcomming:
     defaults: { _controller: AppBundle:Event:eventsUpcomming }
 
 event_details:
-    path:     /eventDetails/{eventId}
+    path:     /eventDetails/{id}
     defaults: { _controller: AppBundle:Event:eventDetails }
 
 event_new:
@@ -23,22 +23,20 @@ event_new:
     defaults: { _controller: AppBundle:Event:newEvent }
 
 join_event:
-    path:     /joinEvent/{eventId}
+    path:     /joinEvent/{id}
     defaults: { _controller: AppBundle:Event:joinEvent }
-edit_event:
-    path:     /editEvent/{eventId}
-    defaults: { _controller: AppBundle:Event:editEvent } 
+
 event_near:
     path:   /near
     defaults: {_controller: AppBundle:Event:near}
 remove_user:
-    path:   /remove/user/{eventId}/{userId}
+    path:   /remove/user/{id}/{userId}
     defaults: {_controller: AppBundle:Event:removeUser}
     
     
     
 invitation_invite:
-    path:     /invite/{userId}/{eventId}
+    path:     /invite/{id}/{eventId}
     defaults: { _controller: AppBundle:Invitation:invite }
 
 invitation_accept:
