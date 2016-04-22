@@ -3,16 +3,24 @@
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class Builder implements ContainerAwareInterface
+class MenuBuilder
 {
-    use ContainerAwareTrait;
+    private $factory;
 
-    public function mainMenu(FactoryInterface $factory, array $options)
+    /**
+     * @param FactoryInterface $factory
+     *
+     * Add any other dependency you need
+     */
+    public function __construct(FactoryInterface $factory)
     {
-        $menu = $factory->createItem('root',
+        $this->factory = $factory;
+    }
+
+    public function createMainMenu(array $options)
+    {
+        $menu = $this->factory->createItem('root',
                 array('childrenAttributes' => array('class' => 'sidebar-menu')));
         
         $menu->addChild('Menu')->setAttribute('class', 'header');
