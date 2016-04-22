@@ -221,7 +221,7 @@ class EventController extends Controller
         
         if (false !== $validator->validateJoin($event, $user, $invitation)) {
             $this->addFlash('error',$ex->getMessage());
-            return $this->redirectToRoute('event_details',array('eventId' => $eventId));
+            return $this->redirectToRoute('event_details',array('eventId' => $event->getId()));
         }
         
         $user->addEventsParticipate($event); // many to many
@@ -237,7 +237,7 @@ class EventController extends Controller
         $em->flush();
         
         $this->addFlash('success','You join event!');
-        return $this->redirectToRoute('event_details',array('eventId' => $eventId));
+        return $this->redirectToRoute('event_details',array('eventId' => $event->getId()));
     }
     
     
